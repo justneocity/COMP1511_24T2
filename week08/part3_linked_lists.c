@@ -57,9 +57,10 @@ int main(void) {
 // Returns:
 //      A pointer to the new node
 struct node *create_node(int data) {
-    // TODO
+    
     struct node *new = malloc(sizeof(struct node));
-    // (*new).data = data;
+    
+    // below line is a shortcut of (*new).data = data;
     new->data = data;
     new->next = NULL;
     return new;
@@ -74,10 +75,10 @@ struct node *create_node(int data) {
 // Returns:
 //      A pointer to the new head of the linked list
 struct node *insert_head(struct node *head, int data) {
-    // TODO
     
     // make a new node
     struct node *new = create_node(data);
+    
     // connect current list head
     new->next = head;
     // reassign head
@@ -99,19 +100,19 @@ struct node *insert_tail(struct node *head, int data) {
     // make a new node
     struct node *new = create_node(data);
 
-    // account for empty list
+    // Case 1: empty list
     if (head == NULL) {
         head = new;
         return head;
     }
-    // e.g. int i = 0
-    struct node *current = head;
 
-    // loop to last node
-    while (current->next != NULL) {
+    // Case 2: 1 or more nodes in list
+    // loop to last node - similar to array loops
+    struct node *current = head;          // int i = 0
+    while (current->next != NULL) {       // while (i < SIZE) {
         // moving along current to next node
-        current = current->next;
-    }
+        current = current->next;          // i++
+    }                                     // }
 
     // connect last node to new
     current->next = new;
